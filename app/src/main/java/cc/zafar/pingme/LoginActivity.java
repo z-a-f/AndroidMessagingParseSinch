@@ -17,7 +17,7 @@ import com.parse.SignUpCallback;
 
 public class LoginActivity extends ActionBarActivity {
 
-	EditText emailEditText, passwordEditText, passwordConfirmEditText;
+	EditText usernameEditText, passwordEditText, passwordConfirmEditText, emailEditText;
 	Button loginButton, registerButton;
 
 	@Override
@@ -25,9 +25,10 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-		emailEditText = (EditText) findViewById(R.id.email_edit_text);
+		usernameEditText = (EditText) findViewById(R.id.username_edit_text);
 		passwordEditText = (EditText) findViewById(R.id.password_edit_text);
 		passwordConfirmEditText = (EditText) findViewById(R.id.password_confirm_edit_text);
+		emailEditText = (EditText) findViewById(R.id.email_edit_text);
 
 		loginButton = (Button) findViewById(R.id.login_button);
 		registerButton = (Button) findViewById(R.id.register_button);
@@ -36,14 +37,26 @@ public class LoginActivity extends ActionBarActivity {
 
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				parseLogin(emailEditText.getText().toString(),
+				parseLogin(usernameEditText.getText().toString(),
 				           passwordEditText.getText().toString());
 			}
 		});
 
 		registerButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				parseRegister();
+				if (passwordConfirmEditText.getVisibility() != View.VISIBLE) {
+					passwordConfirmEditText.setVisibility(View.VISIBLE);
+					emailEditText.setVisibility(View.VISIBLE);
+				} else {
+					if (passwordEditText.getText().toString()
+					                    .equals(passwordConfirmEditText.getText().toString())){
+						parseRegister();
+					} else {
+						Toast.makeText(getApplicationContext(),
+						               getString(R.string.passwords_dont_match),
+						               Toast.LENGTH_LONG).show();
+					}
+				}
 			}
 		});
 	}
@@ -51,6 +64,7 @@ public class LoginActivity extends ActionBarActivity {
 	public void init() {
 		checkIfLoggedIn();
 		passwordConfirmEditText.setVisibility(View.INVISIBLE);
+		emailEditText.setVisibility(View.INVISIBLE);
 	}
 
 	private void checkIfLoggedIn() {
@@ -81,43 +95,31 @@ public class LoginActivity extends ActionBarActivity {
 	}
 
 	private void parseRegister(){
-		if (passwordConfirmEditText.getVisibility() != View.VISIBLE) {
-			passwordConfirmEditText.setVisibility(View.VISIBLE);
-		} else {
-			if (passwordEditText.getText().toString()
-			                    .equals(passwordConfirmEditText.getText().toString())
-				){
-				// TODO: Register with Parse
-				ParseUser user = new ParseUser();
-				user.setUsername(emailEditText.getText().toString());
-				user.setPassword(passwordEditText.getText().toString());
-				user.setEmail(emailEditText.getText().toString());
+		// TODO: Register with Parse
+		ParseUser user = new ParseUser();
+		user.setUsername(usernameEditText.getText().toString());
+		user.setPassword(passwordEditText.getText().toString());
+		user.setEmail(emailEditText.getText().toString());
 
-				// other fields can be set just like with ParseObject
-				// user.put("phone", "650-253-0000");
+		// other fields can be set just like with ParseObject
+		// user.put("phone", "650-253-0000");
 
-				user.signUpInBackground(new SignUpCallback() {
-					public void done(ParseException e) {
-						if (e == null) {
-							// TODO: Hooray! Let them use the app now.
-							Toast.makeText(getApplicationContext(),
-							               "Registered!",
-							               Toast.LENGTH_LONG).show();
-						} else {
-							// TODO: Sign up didn't succeed. Look at the ParseException to figure
-							// out what went wrong
-							Toast.makeText(getApplicationContext(),
-							               e.getMessage(),
-							               Toast.LENGTH_LONG).show();
-						}
-					}
-				});
-			} else {
-				Toast.makeText(getApplicationContext(),
-				               getString(R.string.passwords_dont_match),
-				               Toast.LENGTH_LONG).show();
+		user.signUpInBackground(new SignUpCallback() {
+			public void done(ParseException e) {
+				if (e == null) {
+					// TODO: Hooray! Let them use the app now.
+					Toast.makeText(getApplicationContext(),
+					               "Registered!",
+					               Toast.LENGTH_LONG).show();
+				} else {
+					// TODO: Sign up didn't succeed. Look at the ParseException to figure
+					// out what went wrong
+					Toast.makeText(getApplicationContext(),
+					               e.getMessage(),
+					               Toast.LENGTH_LONG).show();
+				}
 			}
-		}
+		});
 	}
 
 	@Override
