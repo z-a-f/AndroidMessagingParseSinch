@@ -1,6 +1,4 @@
-# AndroidMessagingParseSinch
-
-Basic messaging app using Parse and Sinch APIs
+# Android Messaging App using Parse and Sinch APIs
 
 ### Setting up Parse
 * Create a new app in Parse

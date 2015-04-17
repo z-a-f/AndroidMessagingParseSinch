@@ -47,6 +47,8 @@ public class LoginActivity extends ActionBarActivity {
 				if (passwordConfirmEditText.getVisibility() != View.VISIBLE) {
 					passwordConfirmEditText.setVisibility(View.VISIBLE);
 					emailEditText.setVisibility(View.VISIBLE);
+				//} else if {
+					// TODO: check if edit texts are empty
 				} else {
 					if (passwordEditText.getText().toString()
 					                    .equals(passwordConfirmEditText.getText().toString())){
@@ -95,7 +97,6 @@ public class LoginActivity extends ActionBarActivity {
 	}
 
 	private void parseRegister(){
-		// TODO: Register with Parse
 		ParseUser user = new ParseUser();
 		user.setUsername(usernameEditText.getText().toString());
 		user.setPassword(passwordEditText.getText().toString());
