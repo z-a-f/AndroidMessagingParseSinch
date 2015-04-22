@@ -11,6 +11,7 @@
 * Created in Android Studio
 
 ### TODO
+* Rename to Pingwin
 * Add switching to another activity
 * Show the login/signup screen
 * What to do if login/register fails?
