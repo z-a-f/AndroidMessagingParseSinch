@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Ping Me</string>
+	<string name="action_settings">Настройки</string>
+	<string name="email_edit_text">Электронная почта</string>
+	<string name="hello_world">Прювет!</string>
+	<string name="login_button">Войти</string>
+	<string name="password_confirm_edit_text">Подтверждение пароля</string>
+	<string name="password_edit_text">Пароль</string>
+	<string name="passwords_dont_match">Извините, пароли не совпадают!</string>
+	<string name="phone_number_edit_text">Номер телефона</string>
+	<string name="redirecting_text_view">Переходим!</string>
+	<string name="register_button">Регистрация</string>
+	<string name="username_edit_text">Имя пользователя</string>
+</resources>

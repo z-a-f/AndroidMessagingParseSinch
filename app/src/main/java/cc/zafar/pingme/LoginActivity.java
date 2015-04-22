@@ -44,19 +44,40 @@ public class LoginActivity extends ActionBarActivity {
 
 		registerButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				// Check if register fields are visible:
 				if (passwordConfirmEditText.getVisibility() != View.VISIBLE) {
 					passwordConfirmEditText.setVisibility(View.VISIBLE);
 					emailEditText.setVisibility(View.VISIBLE);
-				//} else if {
-					// TODO: check if edit texts are empty
 				} else {
-					if (passwordEditText.getText().toString()
-					                    .equals(passwordConfirmEditText.getText().toString())){
-						parseRegister();
-					} else {
+					// Check if any fields are empty
+					String[] cant_be_empty = getResources().getStringArray(R.array.cant_be_empty);
+					if (usernameEditText.getText().toString().trim().length() <= 0)
 						Toast.makeText(getApplicationContext(),
-						               getString(R.string.passwords_dont_match),
+						               cant_be_empty[0],
 						               Toast.LENGTH_LONG).show();
+					else if (passwordEditText.getText().toString().trim().length() <= 0)
+						Toast.makeText(getApplicationContext(),
+						               cant_be_empty[1],
+						               Toast.LENGTH_LONG).show();
+					else if (passwordConfirmEditText.getText().toString().trim().length() <= 0)
+						Toast.makeText(getApplicationContext(),
+						               cant_be_empty[2],
+						               Toast.LENGTH_LONG).show();
+					else if (emailEditText.getText().toString().trim().length() <= 0)
+						Toast.makeText(getApplicationContext(),
+						               cant_be_empty[3],
+						               Toast.LENGTH_LONG).show();
+					else {
+						// Check registration
+						if (passwordEditText.getText().toString()
+						                    .equals(passwordConfirmEditText.getText().toString())) {
+
+							parseRegister();
+						} else {
+							Toast.makeText(getApplicationContext(),
+							               getString(R.string.passwords_dont_match),
+							               Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 			}
@@ -72,6 +93,7 @@ public class LoginActivity extends ActionBarActivity {
 	private void checkIfLoggedIn() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if (currentUser != null) {
+			// TODO: Initialize Sinch
 			// TODO: switch to another activity
 		} else {
 			// TODO: show the signup or login screen

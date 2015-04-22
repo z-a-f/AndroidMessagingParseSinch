@@ -13,4 +13,12 @@
 	<string name="register_button">Register</string>
 
 	<string name="passwords_dont_match">Sorry, the passwords don\'t match!</string>
+
+	<string-array name="cant_be_empty">
+		<item>Username cannot be empty</item>
+		<item>Password cannot be empty</item>
+		<item>Password confirmation cannot be empty</item>
+		<item>Email cannot be empty</item>
+	</string-array>
+	<string name="title_activity_main">MainActivity</string>
 </resources>

@@ -21,7 +21,7 @@ public class MainApplication extends Application{
 	private void parseInit() {
 		// Enable Local Datastore.
 		// Parse.enableLocalDatastore(this);
-		Parse.initialize(this, getString(cc.zafar.pingme.R.string.APP_ID),
-		                 getString(cc.zafar.pingme.R.string.CLIENT_KEY));
+		Parse.initialize(this, getString(cc.zafar.pingme.R.string.PARSE_APP_ID),
+		                 getString(cc.zafar.pingme.R.string.PARSE_CLIENT_KEY));
 	}
 }
